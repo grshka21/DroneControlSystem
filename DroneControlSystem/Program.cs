@@ -9,7 +9,7 @@ namespace DroneControlSystem
         {
             Console.WriteLine("=== Система управления БПЛА (версия 1.0) ===\n");
 
-            List<Drone> drones = new List<Drone>
+            List<Drone> dronesList = new List<Drone>
             {
                 new Drone("DJI Mini 3", 85),
                 new Drone("Autel EVO Lite", 45),
@@ -18,7 +18,7 @@ namespace DroneControlSystem
                 new Drone("Mavic 3", 42)
             };
 
-            foreach (Drone drone in drones)
+            foreach (Drone drone in dronesList)
             {
                 drone.PrintInfo();
 
@@ -28,38 +28,35 @@ namespace DroneControlSystem
                 }
                 Console.WriteLine();
             }
-            for (int i = 0; i < drones.Count; i++)
-            {
-                if (drones[i].BatteryLevel < 50)
-                {
-                    Console.WriteLine($"У дрона {drones[i].Model} низкий заряд: {drones[i].BatteryLevel}%.");
-                    Console.Write("Хотите зарядить его? (1 — да, 0 — нет): ");
-                    int choice = int.Parse(Console.ReadLine());
+            Drone myDrone = new Drone("DJI Mini 3", 45);
+            Drone mySecondDrone = new Drone("DJI Avata"); 
 
-                    if (choice == 1)
+            Console.WriteLine("--- Информация о первом дроне ---");
+            myDrone.PrintInfo();
+            Console.WriteLine();
+
+            Console.WriteLine("--- Информация о втором дроне ---");
+            mySecondDrone.PrintInfo();
+            Console.WriteLine();
+
+            Drone[] selectedDrones = { myDrone, mySecondDrone };
+            int i = 0;
+            while (i < selectedDrones.Length)
+            {
+                if (selectedDrones[i].BatteryLevel < 50)
+                {
+                    Console.WriteLine($"У дрона {selectedDrones[i].Model} низкий заряд: {selectedDrones[i].BatteryLevel}%.");
+                    Console.Write("Хотите подзарядить его? (1 — да, 0 — нет): ");
+
+                    if (int.TryParse(Console.ReadLine(), out int choice) && choice == 1)
                     {
-                        drones[i].ChargeBattery(100);
+                        selectedDrones[i].ChargeBattery(100);
+                        Console.WriteLine("Дрон успешно заряжен.");
                     }
                     Console.WriteLine();
                 }
+                i++;
             }
-
-            Console.Write("Введите команду для первого дрона (1 — взлёт, 0 — выход): ");
-            int command = int.Parse(Console.ReadLine());
-            while (command != 0)
-            {
-                if (command == 1)
-                {
-                    drones[0].TakeOff();
-                }
-                else
-                {
-                    Console.WriteLine("Неизвестная команда.");
-                }
-                Console.Write("Введите команду (1 — взлёт первого дрона, 0 — выход): ");
-                command = int.Parse(Console.ReadLine());
-            }
-            Console.WriteLine("Программа завершена.");
         }
     }
 }
