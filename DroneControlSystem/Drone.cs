@@ -9,6 +9,10 @@ namespace DroneControlSystem
         public double Altitude { get; set; }
         public bool IsEngineOn { get; set; }
 
+        public Drone()
+        {
+        }
+
         public Drone(string model, int batteryLevel)
         {
             Model = model;
@@ -20,6 +24,7 @@ namespace DroneControlSystem
         public Drone(string model) : this(model, 100)
         {
         }
+
         public void PrintInfo()
         {
             Console.WriteLine($"Модель: {Model}");
@@ -49,6 +54,12 @@ namespace DroneControlSystem
                 BatteryLevel = 100;
             }
             Console.WriteLine($"Заряд после подзарядки: {BatteryLevel}%");
+        }
+
+        public void CalculateFlightTime()
+        {
+            double estimatedMinutes = BatteryLevel * 0.5;
+            Console.WriteLine($"Расчётное оставшееся время полёта для {Model}: {estimatedMinutes:F1} мин.");
         }
     }
 }
