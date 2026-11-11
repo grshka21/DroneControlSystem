@@ -45,8 +45,7 @@ namespace DroneControlSystem
             BatteryLevel -= 5;
             Console.WriteLine($"{Model} взлетел на высоту 10 м. Заряд: {BatteryLevel}%");
         }
-
-        public void ChargeBattery(int amount)
+            public void ChargeBattery(int amount)
         {
             BatteryLevel += amount;
             if (BatteryLevel > 100)
@@ -55,19 +54,10 @@ namespace DroneControlSystem
             }
             Console.WriteLine($"Заряд после подзарядки: {BatteryLevel}%");
         }
-<<<<<<< HEAD
-
         public void CalculateFlightTime()
         {
             double estimatedMinutes = BatteryLevel * 0.5;
             Console.WriteLine($"Расчётное оставшееся время полёта для {Model}: {estimatedMinutes:F1} мин.");
-=======
-        public void CalculateFlightTime()
-        {
-            double minutes = BatteryLevel * 0.5;
-
-            Console.WriteLine($"Расчётное время полёта для {Model}: {minutes} мин. (заряд: {BatteryLevel}%)");
->>>>>>> feature/interactive-menu
         }
-    }
-}
+    } 
+} 
