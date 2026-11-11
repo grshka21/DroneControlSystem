@@ -55,11 +55,19 @@ namespace DroneControlSystem
             }
             Console.WriteLine($"Заряд после подзарядки: {BatteryLevel}%");
         }
+<<<<<<< HEAD
 
         public void CalculateFlightTime()
         {
             double estimatedMinutes = BatteryLevel * 0.5;
             Console.WriteLine($"Расчётное оставшееся время полёта для {Model}: {estimatedMinutes:F1} мин.");
+=======
+        public void CalculateFlightTime()
+        {
+            double minutes = BatteryLevel * 0.5;
+
+            Console.WriteLine($"Расчётное время полёта для {Model}: {minutes} мин. (заряд: {BatteryLevel}%)");
+>>>>>>> feature/interactive-menu
         }
     }
 }
